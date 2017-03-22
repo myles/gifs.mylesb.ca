@@ -1,25 +1,19 @@
 # -*- coding: utf-8 -*-
 """Views."""
-from glob import glob
 from os.path import exists, join
 
 import yaml
 
 from flask import (Blueprint, abort, current_app, render_template,
                    send_from_directory)
+from web.utils import all_gifs
 
 blueprint = Blueprint('views', __name__)
 
 
 @blueprint.route('/')
 def index():
-    gifs = []
-    gif_files = glob(join(current_app.config['GIFS_PATH'], '**/*.gif'),
-                     recursive=True)
-
-    for filename in gif_files:
-        gif = current_app.config['GIF_REGEX'].search(filename)
-        gifs.append(gif.groups()[0])
+    gifs = all_gifs()
 
     return render_template('index.html', gifs=gifs)
 

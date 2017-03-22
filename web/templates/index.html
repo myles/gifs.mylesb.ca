@@ -1,9 +1,11 @@
 {% extends "base.html" %}
 
 {% block body %}
+<div class="gif-list">
     {% for gif in gifs %}
-    <a href="{{ url_for('views.gif', slug=gif ) }}">
-        <img src="{{ url_for('views.image_gif', slug=gif) }}" />
+    <a href="{{ url_for('views.gif', slug=gif ) }}" class="gif-list__link">
+        <img src="{{ url_for('views.image_gif', slug=gif) }}" class="gif-list__image" />
     </a>
     {%- endfor %}
+</div>
 {%- endblock body %}
