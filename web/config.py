@@ -20,7 +20,7 @@ class Config(object):
     GIFS_PATH = join(ROOT_PATH, 'gifs')
 
     # Regexs
-    GIF_REGEX = re.compile(r'^.*/gifs/(?P<name>[/.a-zA-Z0-9-]+).gif$')
+    GIF_REGEX = re.compile(r'^.*/gifs/(?P<name>[/.a-zA-Z0-9-_]+).gif$')
 
     # Frozen-Flask Config
     # FREEZER_STATIC_IGNORE = ()
