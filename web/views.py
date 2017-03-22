@@ -12,14 +12,14 @@ blueprint = Blueprint('views', __name__)
 
 
 @blueprint.route('/')
-def index():
+def gif_list():
     gifs = all_gifs()
 
-    return render_template('index.html', gifs=gifs)
+    return render_template('gif-list.html', gifs=gifs)
 
 
 @blueprint.route('/<path:slug>/')
-def gif(slug):
+def gif_detail(slug):
     if slug == 'favicon.ico':
         abort(404)
 
@@ -31,7 +31,7 @@ def gif(slug):
         with open(yaml_file) as fobj:
             meta = yaml.load(fobj.read())
 
-    return render_template('gif.html', slug=slug, meta=meta)
+    return render_template('gif-detail.html', slug=slug, meta=meta)
 
 
 @blueprint.route('/<path:slug>/image.gif')

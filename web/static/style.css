@@ -1,6 +1,5 @@
 body {
   background-color: rgba(0, 0, 0, 0.75);
-  margin: 0;
 }
 
 .gif-list {
@@ -8,19 +7,22 @@ body {
   flex-direction: column;
   flex-wrap: wrap;
   padding: 10px;
-  height: 100vw;
+  height: 100vh;
 }
 
 .gif-list__link {
   display: flex;
   flex: 1 1 auto;
   width: 33.3%;
+  height: 25%;
   border-radius: 5px;
 }
 
 .gif-list__image {
-  height: 100%;
-  width: 100%;
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  margin: 5px auto;
 }
 
 .gif-detail {
