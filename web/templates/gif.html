@@ -1,0 +1,5 @@
+{% extends "base.html" %}
+
+{% block body %}
+    <img src="{{ url_for('views.image_gif', slug=slug) }}" {% if meta.caption %}alt="{{ meta.caption }}"{% endif %} />
+{%- endblock body %}
