@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Views."""
-from flask import (Blueprint, abort, current_app, jsonify, url_for,
-                   render_template, send_from_directory)
+from flask import (Blueprint, abort, current_app, jsonify, render_template,
+                   send_from_directory, url_for)
 from web.utils import all_gifs, load_data
 
 blueprint = Blueprint('views', __name__)
@@ -15,7 +15,7 @@ def gif_list():
 
 
 @blueprint.route('/api.json')
-def api():
+def gif_list_json():
     resp = []
 
     gifs = all_gifs()
@@ -45,3 +45,15 @@ def gif_detail(slug):
 def gif_image(slug):
     return send_from_directory(current_app.config['GIFS_PATH'],
                                '{}.gif'.format(slug))
+
+
+@blueprint.route('/<path:slug>/api.json')
+def gif_detail_json(slug):
+    resp = {
+        'slug': slug,
+        'meta': load_data(slug),
+        'image_url': url_for('views.gif_image', slug=slug),
+        'html_url': url_for('views.gif_detail', slug=slug)
+    }
+
+    return jsonify(resp)

@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block extra_head %}
+<link rel="alternate" type="text/javascript" href="{{ url_for('views.gif_list_json') }}">
+{%- endblock %}
+
 {% block body %}
 <div class="gif-list">
     {% for gif in gifs %}
