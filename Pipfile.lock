@@ -8,9 +8,46 @@
         ],
         "requires": {},
         "hash": {
-            "sha256": "cb65967bdf3a7372749ce6144be4ee63f412aeeac624342fda3a2b58b1c43c15"
+            "sha256": "8abd0cc4ecf4a84c5f7438d428c8c24ba07bb4abdd704075b6a4274323a99c73"
         }
     },
-    "default": {},
+    "default": {
+        "click": {
+            "hash": "sha256:29f99fc6125fbc931b758dc053b3114e55c77a6e4c6c3a2674a2dc986016381d",
+            "version": "==6.7"
+        },
+        "Flask": {
+            "hash": "sha256:7f03bb2c255452444f7265eddb51601806e5447b6f8a2d50bbc77a654a14c118",
+            "version": "==0.12"
+        },
+        "Flask-paginate": {
+            "hash": "sha256:eb58636b98dc5349d4fe150614037a89bca46f24de924fe31a7ef70a7f25f368",
+            "version": "==0.4.5"
+        },
+        "Frozen-Flask": {
+            "hash": "sha256:da3bad5caf789bc1133e6ad5ba325c0378c8d4405c4e4a810c984fa76c0a3151",
+            "version": "==0.13"
+        },
+        "itsdangerous": {
+            "hash": "sha256:cbb3fcf8d3e33df861709ecaf89d9e6629cff0a217bc2848f1b41cd30d360519",
+            "version": "==0.24"
+        },
+        "Jinja2": {
+            "hash": "sha256:a7b7438120dbe76a8e735ef7eba6048eaf4e0b7dbc530e100812f8ec462a4d50",
+            "version": "==2.9.5"
+        },
+        "MarkupSafe": {
+            "hash": "sha256:a6be69091dac236ea9c6bc7d012beab42010fa914c459791d627dad4910eb665",
+            "version": "==1.0"
+        },
+        "PyYAML": {
+            "hash": "sha256:592766c6303207a20efc445587778322d7f73b161bd994f227adaa341ba212ab",
+            "version": "==3.12"
+        },
+        "Werkzeug": {
+            "hash": "sha256:918322630c58fa52b89e14c45de3ad78514e18928dac726060bb89cd647f6b83",
+            "version": "==0.12.1"
+        }
+    },
     "develop": {}
 }

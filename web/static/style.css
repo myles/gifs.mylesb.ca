@@ -7,7 +7,7 @@ body {
   flex-direction: column;
   flex-wrap: wrap;
   padding: 10px;
-  height: 100vh;
+  height: 90vh;
 }
 
 .gif-list__link {
