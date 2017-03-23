@@ -1,12 +1,8 @@
 # -*- coding: utf-8 -*-
 """Views."""
-from os.path import exists, join
-
-import yaml
-
-from flask import (Blueprint, abort, current_app, render_template,
-                   send_from_directory)
-from web.utils import all_gifs
+from flask import (Blueprint, abort, current_app, jsonify, url_for,
+                   render_template, send_from_directory)
+from web.utils import all_gifs, load_data
 
 blueprint = Blueprint('views', __name__)
 
@@ -18,23 +14,34 @@ def gif_list():
     return render_template('gif-list.html', gifs=gifs)
 
 
+@blueprint.route('/api.json')
+def api():
+    resp = []
+
+    gifs = all_gifs()
+
+    for slug in gifs:
+        resp.append({
+            'slug': slug,
+            'meta': load_data(slug),
+            'image_url': url_for('views.gif_image', slug=slug),
+            'html_url': url_for('views.gif_detail', slug=slug)
+        })
+
+    return jsonify(resp)
+
+
 @blueprint.route('/<path:slug>/')
 def gif_detail(slug):
     if slug == 'favicon.ico':
         abort(404)
 
-    yaml_file = join(current_app.config['GIFS_PATH'], '{}.yml'.format(slug))
-
-    if not exists(yaml_file):
-        meta = {}
-    else:
-        with open(yaml_file) as fobj:
-            meta = yaml.load(fobj.read())
+    meta = load_data(slug)
 
     return render_template('gif-detail.html', slug=slug, meta=meta)
 
 
 @blueprint.route('/<path:slug>/image.gif')
-def image_gif(slug):
+def gif_image(slug):
     return send_from_directory(current_app.config['GIFS_PATH'],
                                '{}.gif'.format(slug))

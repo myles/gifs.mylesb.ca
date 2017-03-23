@@ -4,11 +4,11 @@
 
 {% block extra_head %}
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://gifs.mylesb.ca{{ url_for('views.image_gif', slug=slug) }}">
+<meta property="og:image" content="https://gifs.mylesb.ca{{ url_for('views.gif_image', slug=slug) }}">
 {%- endblock %}
 
 {% block body %}
 <div class="gif-detail">
-    <img src="{{ url_for('views.image_gif', slug=slug) }}" class="gif-detail__image" {% if meta.caption %}alt="{{ meta.caption }}"{% endif %} />
+    <img src="{{ url_for('views.gif_image', slug=slug) }}" class="gif-detail__image" {% if meta.caption %}alt="{{ meta.caption }}"{% endif %} />
 </div>
 {%- endblock body %}
