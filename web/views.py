@@ -16,16 +16,16 @@ def gif_list():
 
 @blueprint.route('/api.json')
 def gif_list_json():
-    resp = []
-
+    tpl_url = 'https://mylesb.ca{}'
     gifs = all_gifs()
 
+    resp = []
     for slug in gifs:
         resp.append({
             'slug': slug,
             'meta': load_data(slug),
-            'image_url': url_for('views.gif_image', slug=slug),
-            'html_url': url_for('views.gif_detail', slug=slug)
+            'image_url': tpl_url.format(url_for('views.gif_image', slug=slug)),
+            'html_url': tpl_url.format(url_for('views.gif_detail', slug=slug))
         })
 
     return jsonify(resp)
