@@ -8,6 +8,7 @@ blueprint = Blueprint('views', __name__)
 
 
 @blueprint.route('/')
+@blueprint.route('/page/<int:page>/')
 def gif_list():
     gifs = all_gifs()
 
