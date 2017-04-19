@@ -1,12 +1,14 @@
 body {
+  background-color: #000;
   background-color: rgba(0, 0, 0, 0.75);
+  margin: 0;
 }
 
 .gif-list {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  padding: 10px;
+  margin: 10px;
   height: 90vh;
 }
 
