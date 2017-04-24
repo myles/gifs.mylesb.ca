@@ -17,7 +17,7 @@ def gif_list():
 
 @blueprint.route('/api.json')
 def gif_list_json():
-    tpl_url = 'https://mylesb.ca{}'
+    tpl_url = 'https://gifs.mylesb.ca{}'
     gifs = all_gifs()
 
     resp = []
@@ -26,7 +26,9 @@ def gif_list_json():
             'slug': slug,
             'meta': load_data(slug),
             'image_url': tpl_url.format(url_for('views.gif_image', slug=slug)),
-            'html_url': tpl_url.format(url_for('views.gif_detail', slug=slug))
+            'html_url': tpl_url.format(url_for('views.gif_detail', slug=slug)),
+            'json_url': tpl_url.format(url_for('views.gif_detail_json',
+                                               slug=slug))
         })
 
     return jsonify(resp)
@@ -50,11 +52,13 @@ def gif_image(slug):
 
 @blueprint.route('/<path:slug>/api.json')
 def gif_detail_json(slug):
+    tpl_url = 'https://gifs.mylesb.ca{}'
+
     resp = {
         'slug': slug,
         'meta': load_data(slug),
-        'image_url': url_for('views.gif_image', slug=slug),
-        'html_url': url_for('views.gif_detail', slug=slug)
+        'image_url': tpl_url.format(url_for('views.gif_image', slug=slug)),
+        'html_url': tpl_url.format(url_for('views.gif_detail', slug=slug))
     }
 
     return jsonify(resp)

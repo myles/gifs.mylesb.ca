@@ -8,8 +8,12 @@ from os.path import abspath, dirname, join
 class Config(object):
     DEBUG = True
 
+    # URL
+    URL = 'https://gifs.mylesb.ca'
+    URL_TPL = 'https://gifs.mylesb.ca/{}'
+
     # GitHub Repository URL
-    GITHUB_REPO = 'https://github.com/myles/talks'
+    GITHUB_REPO = 'https://github.com/myles/gifs.mylesb.ca'
 
     # Paths
     APP_PATH = dirname(abspath(__file__))
