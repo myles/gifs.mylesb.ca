@@ -5,10 +5,9 @@ body {
 }
 
 .gif-list {
-  align-items: center;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
   margin: 0 auto;
 
   &__link {

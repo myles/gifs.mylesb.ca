@@ -4,10 +4,9 @@ body {
   margin: 0; }
 
 .gif-list {
-  align-items: center;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
   margin: 0 auto; }
   .gif-list__link {
     align-items: center;
