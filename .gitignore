@@ -1,5 +1,7 @@
 gifs/*.gif
 gifs/**/*.gif
+gifs/*.mp4
+gifs/**/*.mp4
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

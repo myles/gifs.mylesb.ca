@@ -19,6 +19,8 @@
 <meta property="og:image" content="https://gifs.mylesb.ca{{ url_for('views.gif_image', slug=slug) }}">
 {% if meta.width %}<meta property="og:image:width" content="{{ meta.width }}">{% endif %}
 {% if meta.height %}<meta property="og:image:height" content="{{ meta.height }}">{% endif %}
+
+<link rel="alternate" type="application/json+oembed" href="https://gifs.mylesb.ca{{ url_for('views.gif_oembed_json', slug=slug) }}">
 {%- endblock %}
 
 {% block body %}

@@ -3,7 +3,8 @@
 from flask import (Blueprint, abort, current_app, jsonify, render_template,
                    send_from_directory, url_for)
 from pypages import Paginator
-from web.utils import all_gifs, load_data
+
+from .utils import all_gifs, load_data
 
 blueprint = Blueprint('views', __name__)
 
@@ -11,6 +12,7 @@ blueprint = Blueprint('views', __name__)
 @blueprint.route('/')
 @blueprint.route('/p<int:page>.html')
 def gif_list(page=1):
+    """List all Gifs."""
     per_page = 12
 
     gifs = all_gifs()
@@ -29,6 +31,7 @@ def gif_list(page=1):
 
 @blueprint.route('/api.json')
 def gif_list_json():
+    """List all Gifs in a JSON format."""
     tpl_url = 'https://gifs.mylesb.ca{}'
     gifs = all_gifs()
 
@@ -48,6 +51,7 @@ def gif_list_json():
 
 @blueprint.route('/<path:slug>/')
 def gif_detail(slug):
+    """Get detail of Gif."""
     if slug == 'favicon.ico':
         abort(404)
 
@@ -58,19 +62,47 @@ def gif_detail(slug):
 
 @blueprint.route('/<path:slug>/image.gif')
 def gif_image(slug):
+    """Get the Gif."""
     return send_from_directory(current_app.config['GIFS_PATH'],
                                '{}.gif'.format(slug))
 
 
+@blueprint.route('/<path:slug>/image.mp4')
+def gif_image_mp4(slug):
+    """Get the MP4."""
+    return send_from_directory(current_app.config['GIFS_PATH'],
+                               '{}.mp4'.format(slug))
+
+
 @blueprint.route('/<path:slug>/api.json')
 def gif_detail_json(slug):
+    """Get detail of Gif in JSON."""
     tpl_url = 'https://gifs.mylesb.ca{}'
 
+    resp = load_data(slug)
+
+    resp['slug'] = slug
+    resp['image_url'] = tpl_url.format(url_for('views.gif_image', slug=slug))
+    resp['html_url'] = tpl_url.format(url_for('views.gif_detail', slug=slug))
+
+    return jsonify(resp)
+
+
+@blueprint.route('/<path:slug>/oembed.json')
+def gif_oembed_json(slug):
+    """Get the Gif in oEmbed format."""
+    tpl_url = 'https://gifs.mylesb.ca{}'
+
+    data = load_data(slug)
+
     resp = {
-        'slug': slug,
-        'meta': load_data(slug),
-        'image_url': tpl_url.format(url_for('views.gif_image', slug=slug)),
-        'html_url': tpl_url.format(url_for('views.gif_detail', slug=slug))
+        'version': '1.0',
+        'type': 'photo',
+        'url': tpl_url.format(url_for('views.gif_image', slug=slug)),
+        'width': data['width'],
+        'height': data['height'],
+        'provider_name': "Myles' Gifs",
+        'provider_url': 'https://gifs.mylesb.ca/',
     }
 
     return jsonify(resp)
