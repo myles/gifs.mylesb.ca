@@ -26,12 +26,15 @@ def load_data(slug):
 
     yaml_file = join(current_app.config['GIFS_PATH'], '{}.yml'.format(slug))
 
-    if not exists(yaml_file):
-        return data
+    if exists(yaml_file):
+        with open(yaml_file) as fobj:
+            meta = yaml.load(fobj.read())
+    else:
+        meta = {}
 
-    with open(yaml_file) as fobj:
-        meta = yaml.load(fobj.read())
-        return data.update(meta)
+    data.update(meta)
+
+    return data
 
 
 def all_gifs():

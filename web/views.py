@@ -36,11 +36,14 @@ def gif_list_json():
     gifs = all_gifs()
 
     resp = []
+
     for slug in gifs:
         resp.append({
             'slug': slug,
             'meta': load_data(slug),
             'image_url': tpl_url.format(url_for('views.gif_image', slug=slug)),
+            'mp4_url': tpl_url.format(url_for('views.gif_image_mp4',
+                                              slug=slug)),
             'html_url': tpl_url.format(url_for('views.gif_detail', slug=slug)),
             'json_url': tpl_url.format(url_for('views.gif_detail_json',
                                                slug=slug))
@@ -85,6 +88,10 @@ def gif_detail_json(slug):
     resp['image_url'] = tpl_url.format(url_for('views.gif_image', slug=slug))
     resp['html_url'] = tpl_url.format(url_for('views.gif_detail', slug=slug))
 
+    if resp.get('mp4'):
+        resp['mp4_url'] = tpl_url.format(url_for('views.gif_image_mp4',
+                                                 slug=slug))
+
     return jsonify(resp)
 
 
@@ -99,10 +106,12 @@ def gif_oembed_json(slug):
         'version': '1.0',
         'type': 'photo',
         'url': tpl_url.format(url_for('views.gif_image', slug=slug)),
-        'width': data['width'],
-        'height': data['height'],
         'provider_name': "Myles' Gifs",
         'provider_url': 'https://gifs.mylesb.ca/',
     }
+
+    if data:
+        resp['width'] = data['width']
+        resp['height'] = data['height']
 
     return jsonify(resp)

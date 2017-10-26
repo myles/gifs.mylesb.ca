@@ -25,6 +25,13 @@
 
 {% block body %}
 <div class="gif-detail">
+    {% if meta.mp4 %}
+    <video loop autoplay muted>
+        <source src="{{ url_for('views.gif_image_mp4', slug=slug)}}" type="video/mp4" class="gif-detail__image" />
+        <img src="{{ url_for('views.gif_image', slug=slug) }}" class="gif-detail__image" {% if meta.caption %}alt="{{ meta.caption }}"{% endif %} />
+    </video>
+    {% else %}
     <img src="{{ url_for('views.gif_image', slug=slug) }}" class="gif-detail__image" {% if meta.caption %}alt="{{ meta.caption }}"{% endif %} />
+    {% endif %}
 </div>
 {%- endblock body %}
