@@ -42,8 +42,6 @@ def gif_list_json():
             'slug': slug,
             'meta': load_data(slug),
             'image_url': tpl_url.format(url_for('views.gif_image', slug=slug)),
-            'mp4_url': tpl_url.format(url_for('views.gif_image_mp4',
-                                              slug=slug)),
             'html_url': tpl_url.format(url_for('views.gif_detail', slug=slug)),
             'json_url': tpl_url.format(url_for('views.gif_detail_json',
                                                slug=slug))
