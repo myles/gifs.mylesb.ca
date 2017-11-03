@@ -7,27 +7,31 @@
 		"uuidString": "63BE2B02-42F4-4E4A-B66A-04961BAE46BE"
 		}
 	],
-"creatorBuild": "25900",
+"creatorBuild": "26097",
 "files": {
 	"\/.gitattributes": {
+		"cB": 0,
 		"ft": 8192,
 		"oA": 1,
 		"oAP": "\/.gitattributes",
 		"oF": 1
 		},
 	"\/.gitignore": {
+		"cB": 0,
 		"ft": 8192,
 		"oA": 1,
 		"oAP": "\/.gitignore",
 		"oF": 1
 		},
 	"\/.htmlhintrc": {
+		"cB": 0,
 		"ft": 8192,
 		"oA": 1,
 		"oAP": "\/.htmlhintrc",
 		"oF": 1
 		},
 	"\/.travis.yml": {
+		"cB": 0,
 		"ft": 8192,
 		"oA": 1,
 		"oAP": "\/.travis.yml",
@@ -40,6 +44,7 @@
 		"oF": 0
 		},
 	"\/autoapp.py": {
+		"cB": 0,
 		"ft": 8192,
 		"oA": 1,
 		"oAP": "\/autoapp.py",
@@ -70,42 +75,49 @@
 		"oF": 0
 		},
 	"\/Pipfile": {
+		"cB": 0,
 		"ft": 8192,
 		"oA": 1,
 		"oAP": "\/Pipfile",
 		"oF": 1
 		},
 	"\/Pipfile.lock": {
+		"cB": 0,
 		"ft": 8192,
 		"oA": 1,
 		"oAP": "\/Pipfile.lock",
 		"oF": 1
 		},
 	"\/Procfile": {
+		"cB": 0,
 		"ft": 8192,
 		"oA": 1,
 		"oAP": "\/Procfile",
 		"oF": 1
 		},
 	"\/README.rst": {
+		"cB": 0,
 		"ft": 8192,
 		"oA": 1,
 		"oAP": "\/README.rst",
 		"oF": 1
 		},
 	"\/setup.cfg": {
+		"cB": 0,
 		"ft": 8192,
 		"oA": 1,
 		"oAP": "\/setup.cfg",
 		"oF": 1
 		},
 	"\/web\/__init__.py": {
+		"cB": 0,
 		"ft": 8192,
 		"oA": 1,
 		"oAP": "\/web\/__init__.py",
 		"oF": 0
 		},
 	"\/web\/__init__.pyc": {
+		"cB": 0,
 		"ft": 8192,
 		"oA": 1,
 		"oAP": "\/web\/__init__.pyc",
@@ -118,24 +130,28 @@
 		"oF": 0
 		},
 	"\/web\/app.py": {
+		"cB": 0,
 		"ft": 8192,
 		"oA": 1,
 		"oAP": "\/web\/app.py",
 		"oF": 1
 		},
 	"\/web\/app.pyc": {
+		"cB": 0,
 		"ft": 8192,
 		"oA": 1,
 		"oAP": "\/web\/app.pyc",
 		"oF": 1
 		},
 	"\/web\/commands.py": {
+		"cB": 0,
 		"ft": 8192,
 		"oA": 1,
 		"oAP": "\/web\/commands.py",
 		"oF": 1
 		},
 	"\/web\/config.py": {
+		"cB": 0,
 		"ft": 8192,
 		"oA": 1,
 		"oAP": "\/web\/config.py",
@@ -171,12 +187,14 @@
 		"oF": 0
 		},
 	"\/web\/utils.py": {
+		"cB": 0,
 		"ft": 8192,
 		"oA": 1,
 		"oAP": "\/web\/utils.py",
 		"oF": 1
 		},
 	"\/web\/views.py": {
+		"cB": 0,
 		"ft": 8192,
 		"oA": 1,
 		"oAP": "\/web\/views.py",
@@ -727,6 +745,10 @@
 			"active": 0,
 			"optionString": "'expression'"
 			},
+		"function-paren-newline": {
+			"active": 0,
+			"optionString": "'multiline'"
+			},
 		"generator-star-spacing": {
 			"active": 0,
 			"optionString": "{'before': true, 'after': false}"
@@ -791,9 +813,9 @@
 			"active": 0,
 			"optionString": "{'beforeBlockComment': true}"
 			},
-		"lines-around-directive": {
+		"lines-between-class-members": {
 			"active": 0,
-			"optionString": "{'before': 'always', 'after': 'always'}"
+			"optionString": "'always', {exceptAfterSingleLine: false}"
 			},
 		"max-depth": {
 			"active": 0,
@@ -823,6 +845,10 @@
 			"active": 0,
 			"optionString": "{'max': 1}"
 			},
+		"multiline-comment-style": {
+			"active": 0,
+			"optionString": "'starred-block'"
+			},
 		"multiline-ternary": {
 			"active": 0,
 			"optionString": "'always'"
@@ -832,14 +858,6 @@
 			"optionString": "{'newIsCap': true, 'capIsNew': true, 'newIsCapExceptions': [], 'capIsNewExceptions': ['Array', 'Boolean', 'Date', 'Error', 'Function', 'Number', 'Object', 'RegExp', 'String', 'Symbol'], 'properties': true}"
 			},
 		"new-parens": {
-			"active": 0,
-			"optionString": ""
-			},
-		"newline-after-var": {
-			"active": 0,
-			"optionString": "'always'"
-			},
-		"newline-before-return": {
 			"active": 0,
 			"optionString": ""
 			},
@@ -1943,7 +1961,8 @@
 		"createSourceMap": 0,
 		"minifyOutput": 1,
 		"outputStyle": 0,
-		"syntaxCheckerStyle": 1
+		"syntaxCheckerStyle": 1,
+		"transpilerStyle": 1
 		},
 	"languageDefaultsCSS": {
 		"autoOutputAction": 0,
@@ -1976,6 +1995,7 @@
 		"noEscapeInAttributes": 0,
 		"outputFormat": 2,
 		"outputStyle": 0,
+		"shouldRunCacheBuster": 0,
 		"useCDATA": 0,
 		"useDoubleQuotes": 0,
 		"useUnixNewlines": 0
@@ -2017,7 +2037,8 @@
 		"autoOutputPathRelativePath": "",
 		"autoOutputPathReplace1": "kit",
 		"autoOutputPathReplace2": "html",
-		"autoOutputPathStyle": 0
+		"autoOutputPathStyle": 0,
+		"shouldRunCacheBuster": 0
 		},
 	"languageDefaultsLESS": {
 		"allowInsecureImports": 0,
@@ -2049,13 +2070,13 @@
 		"enableFootnotes": 1,
 		"enableLabels": 1,
 		"enableSmartQuotes": 1,
-		"escapeLineBreaks": 0,
 		"maskEmailAddresses": 1,
 		"outputFormat": 0,
 		"outputStyle": 0,
 		"parseMetadata": 1,
 		"processHTML": 0,
 		"randomFootnoteNumbers": 0,
+		"shouldRunCacheBuster": 0,
 		"useCompatibilityMode": 0
 		},
 	"languageDefaultsOTHER": {
@@ -2064,7 +2085,8 @@
 		"autoOutputPathRelativePath": "",
 		"autoOutputPathReplace1": "",
 		"autoOutputPathReplace2": "",
-		"autoOutputPathStyle": 0
+		"autoOutputPathStyle": 0,
+		"shouldRunCacheBuster": 0
 		},
 	"languageDefaultsPNG": {
 		"autoOutputAction": 0,
@@ -2084,7 +2106,8 @@
 		"autoOutputPathReplace2": "",
 		"autoOutputPathStyle": 0,
 		"compileDebug": 1,
-		"outputStyle": 0
+		"outputStyle": 0,
+		"shouldRunCacheBuster": 0
 		},
 	"languageDefaultsSASS": {
 		"autoOutputAction": 0,
@@ -2112,7 +2135,8 @@
 		"logicless": 0,
 		"outputFormat": 0,
 		"outputStyle": 1,
-		"railsCompatible": 0
+		"railsCompatible": 0,
+		"shouldRunCacheBuster": 0
 		},
 	"languageDefaultsSTYLUS": {
 		"autoOutputAction": 0,
