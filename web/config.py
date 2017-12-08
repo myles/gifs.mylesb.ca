@@ -7,6 +7,7 @@ from os.path import abspath, dirname, join
 
 class Config(object):
     DEBUG = True
+    SEND_FILE_MAX_AGE_DEFAULT = 0
 
     # URL
     URL = 'https://gifs.mylesb.ca'
