@@ -2,8 +2,8 @@
 """Views."""
 from flask import (Blueprint, abort, current_app, jsonify, render_template,
                    send_from_directory, url_for)
-from pypages import Paginator
 
+from .pagination import Paginator
 from .utils import all_gifs, load_data
 
 blueprint = Blueprint('views', __name__)
@@ -13,20 +13,12 @@ blueprint = Blueprint('views', __name__)
 @blueprint.route('/p<int:page>.html')
 def gif_list(page=1):
     """List all Gifs."""
-    per_page = 12
-
     gifs = all_gifs()
+    paginator = Paginator(gifs, 25)
 
-    pages = Paginator(len(gifs), per_page=per_page, current=page)
+    page = paginator.get_page(page)
 
-    if page > 1:
-        start = (page - 1) * per_page
-    else:
-        start = 0
-
-    end = page * per_page - 1
-
-    return render_template('gif-list.html', gifs=gifs[start:end], pages=pages)
+    return render_template('gif-list.html', page=page)
 
 
 @blueprint.route('/api.json')

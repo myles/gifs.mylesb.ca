@@ -1,6 +1,12 @@
+@import 'functions';
+
+$primary-colour: rgb(104, 78, 121);
+
 body {
-  background-color: #000;
-  margin: 0;
+  background-color: $primary-colour;
+  color: set-text-colour($primary-colour);
+  font-family: sans-serif;
+  margin: 0 auto;
 }
 
 @import 'gif-list';

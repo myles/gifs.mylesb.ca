@@ -2,18 +2,26 @@
   display: flex;
   flex-flow: row;
   flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
 
   &__link {
-    background-color: lighten(#000, 5);
+    background-color: lighten($primary-colour, 5);
+    color: set-text-colour(lighten($primary-colour, 5));
+    text-decoration: none;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 245px;
-    height: 245px;
-    margin: 5px;
-    padding: 0;
+    width: 225px;
+    height: 225px;
+    margin: 10px;
+    padding: 15px;
+    font-size: 2rem;
+
+    &:hover {
+      background-color: lighten($primary-colour, 25);
+      color: set-text-colour(lighten($primary-colour, 25));
+    }
   }
 
   &__image {

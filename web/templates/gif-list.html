@@ -6,18 +6,24 @@
 
 {% block body %}
 <div class="gif-list">
-    {% if pages.has_previous %}
-    <a href="{{ url_for('views.gif_list', page=pages.previous) }}" class="gif-list__link gif-list__link--page">Previous</a>
+    {% if page.number == 1 %}
+    <a href="/" class="gif-list__link gif-list__link--title">
+        Myles' Gifs
+    </a>
     {% endif %}
 
-    {% for gif in gifs %}
+    {% if page.has_previous %}
+    <a href="{{ url_for('views.gif_list', page=page.previous_page_number) }}" class="gif-list__link gif-list__link--page">Previous</a>
+    {% endif %}
+
+    {% for gif in page.object_list %}
     <a href="{{ url_for('views.gif_detail', slug=gif ) }}" class="gif-list__link">
         <img src="{{ url_for('views.gif_image', slug=gif) }}" class="gif-list__image" />
     </a>
     {%- endfor %}
 
-    {% if pages.has_next %}
-    <a href="{{ url_for('views.gif_list', page=pages.next) }}" class="gif-list__link gif-list__link--page">Next</a>
+    {% if page.has_next %}
+    <a href="{{ url_for('views.gif_list', page=page.next_page_number) }}" class="gif-list__link gif-list__link--page">Next</a>
     {% endif %}
 </div>
 {%- endblock body %}

@@ -1,22 +1,30 @@
 body {
-  background-color: #000;
-  margin: 0; }
+  background-color: #684e79;
+  color: #f7f6f8;
+  font-family: sans-serif;
+  margin: 0 auto; }
 
 .gif-list {
   display: flex;
   flex-flow: row;
   flex-wrap: wrap;
-  justify-content: center;
-  align-items: center; }
+  justify-content: flex-start;
+  align-items: flex-start; }
   .gif-list__link {
-    background-color: #0d0d0d;
+    background-color: #755889;
+    color: #f8f7f9;
+    text-decoration: none;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 245px;
-    height: 245px;
-    margin: 5px;
-    padding: 0; }
+    width: 225px;
+    height: 225px;
+    margin: 10px;
+    padding: 15px;
+    font-size: 2rem; }
+    .gif-list__link:hover {
+      background-color: #a78fb7;
+      color: #322b37; }
   .gif-list__image {
     display: block;
     max-width: 100%;
