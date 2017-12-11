@@ -20,7 +20,7 @@ def gif_list(page=1):
     pages = Paginator(len(gifs), per_page=per_page, current=page)
 
     if page > 1:
-        start = (page - 1) * per_page - 1
+        start = (page - 1) * per_page
     else:
         start = 0
 
