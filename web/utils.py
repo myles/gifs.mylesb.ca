@@ -1,15 +1,24 @@
 """Utitlities."""
+from datetime import datetime
 from glob import glob
 from os.path import exists, getmtime, join
 
 import yaml
-from flask import current_app
+from flask import current_app, url_for
 from PIL import Image
 
 
 def load_data(slug):
     """Load the data."""
-    data = {}
+    tpl_url = 'https://gifs.mylesb.ca{}'
+
+    data = {
+        'slug': slug,
+        'image_url': tpl_url.format(url_for('views.gif_image', slug=slug)),
+        'html_url': tpl_url.format(url_for('views.gif_detail', slug=slug)),
+        'json_url': tpl_url.format(url_for('views.gif_detail_json',
+                                           slug=slug))
+    }
 
     gif_file = join(current_app.config['GIFS_PATH'], '{}.gif'.format(slug))
     mp4_file = join(current_app.config['GIFS_PATH'], '{}.mp4'.format(slug))
@@ -20,6 +29,8 @@ def load_data(slug):
 
     if exists(mp4_file):
         data['mp4'] = True
+        data['mp4_url'] = tpl_url.format(url_for('views.gif_image_mp4',
+                                                 slug=slug))
 
     image = Image.open(gif_file)
     data['width'], data['height'] = image.size
@@ -32,6 +43,9 @@ def load_data(slug):
     else:
         meta = {}
 
+    if not meta.get('date'):
+        meta['date'] = datetime.fromtimestamp(getmtime(gif_file)).isoformat()
+
     data.update(meta)
 
     return data
@@ -43,10 +57,14 @@ def all_gifs():
 
     gif_files = glob(join(current_app.config['GIFS_PATH'], '**/*.gif'),
                      recursive=True)
-    gif_files = sorted(gif_files, key=lambda x: getmtime(x), reverse=True)
 
     for filename in gif_files:
-        gif = current_app.config['GIF_REGEX'].search(filename)
-        gifs.append(gif.groups()[0])
+        slug = current_app.config['GIF_REGEX'].search(filename).groups()[0]
+
+        gif = load_data(slug)
+
+        gifs.append(gif)
+
+    gifs = sorted(gifs, key=lambda x: x['date'], reverse=True)
 
     return gifs

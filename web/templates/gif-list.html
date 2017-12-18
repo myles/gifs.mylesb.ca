@@ -17,8 +17,8 @@
     {% endif %}
 
     {% for gif in page.object_list %}
-    <a href="{{ url_for('views.gif_detail', slug=gif ) }}" class="gif-list__link">
-        <img src="{{ url_for('views.gif_image', slug=gif) }}" class="gif-list__image" />
+    <a class="gif-list__link" href="{{ url_for('views.gif_detail', slug=gif.slug) }}" {% if gif.caption %}title="{{ gif.caption }}"{% endif %}>
+        <img src="{{ url_for('views.gif_image', slug=gif.slug) }}" class="gif-list__image" />
     </a>
     {%- endfor %}
 

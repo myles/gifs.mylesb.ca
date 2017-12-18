@@ -14,6 +14,7 @@ blueprint = Blueprint('views', __name__)
 def gif_list(page=1):
     """List all Gifs."""
     gifs = all_gifs()
+
     paginator = Paginator(gifs, 25)
 
     page = paginator.get_page(page)
@@ -24,22 +25,9 @@ def gif_list(page=1):
 @blueprint.route('/api.json')
 def gif_list_json():
     """List all Gifs in a JSON format."""
-    tpl_url = 'https://gifs.mylesb.ca{}'
     gifs = all_gifs()
 
-    resp = []
-
-    for slug in gifs:
-        resp.append({
-            'slug': slug,
-            'meta': load_data(slug),
-            'image_url': tpl_url.format(url_for('views.gif_image', slug=slug)),
-            'html_url': tpl_url.format(url_for('views.gif_detail', slug=slug)),
-            'json_url': tpl_url.format(url_for('views.gif_detail_json',
-                                               slug=slug))
-        })
-
-    return jsonify(resp)
+    return jsonify(gifs)
 
 
 @blueprint.route('/<path:slug>/')
@@ -48,9 +36,9 @@ def gif_detail(slug):
     if slug == 'favicon.ico':
         abort(404)
 
-    meta = load_data(slug)
+    gif = load_data(slug)
 
-    return render_template('gif-detail.html', slug=slug, meta=meta)
+    return render_template('gif-detail.html', gif=gif)
 
 
 @blueprint.route('/<path:slug>/image.gif')
@@ -70,19 +58,8 @@ def gif_image_mp4(slug):
 @blueprint.route('/<path:slug>/api.json')
 def gif_detail_json(slug):
     """Get detail of Gif in JSON."""
-    tpl_url = 'https://gifs.mylesb.ca{}'
-
-    resp = load_data(slug)
-
-    resp['slug'] = slug
-    resp['image_url'] = tpl_url.format(url_for('views.gif_image', slug=slug))
-    resp['html_url'] = tpl_url.format(url_for('views.gif_detail', slug=slug))
-
-    if resp.get('mp4'):
-        resp['mp4_url'] = tpl_url.format(url_for('views.gif_image_mp4',
-                                                 slug=slug))
-
-    return jsonify(resp)
+    gif = load_data(slug)
+    return jsonify(gif)
 
 
 @blueprint.route('/<path:slug>/oembed.json')
