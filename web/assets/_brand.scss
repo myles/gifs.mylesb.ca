@@ -8,8 +8,8 @@
     text-decoration: none;
 
     &:hover {
-      text-decoration: underline;
       color: darken(set-text-colour($primary-colour), 10);
+      text-decoration: underline;
     }
   }
 }
