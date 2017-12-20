@@ -1,0 +1,15 @@
+.brand {
+  padding: .5rem 1rem;
+  position: absolute;
+
+  &__link {
+    color: set-text-colour($primary-colour);
+    font-size: 5vh;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+      color: darken(set-text-colour($primary-colour), 10);
+    }
+  }
+}

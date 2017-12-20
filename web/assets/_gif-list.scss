@@ -1,22 +1,22 @@
 .gif-list {
+  align-items: flex-start;
   display: flex;
   flex-flow: row;
   flex-wrap: wrap;
   justify-content: flex-start;
-  align-items: flex-start;
 
   &__link {
+    align-items: center;
     background-color: lighten($primary-colour, 5);
     color: set-text-colour(lighten($primary-colour, 5));
-    text-decoration: none;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 225px;
+    font-size: 2rem;
     height: 225px;
+    justify-content: center;
     margin: 10px;
     padding: 15px;
-    font-size: 2rem;
+    text-decoration: none;
+    width: 225px;
 
     &:hover {
       background-color: lighten($primary-colour, 25);

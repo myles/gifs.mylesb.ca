@@ -24,6 +24,12 @@
 {%- endblock %}
 
 {% block body %}
+<div class="brand">
+    <a href="{{ url_for('views.gif_list') }}" class="brand__link">
+        Myles' Gifs
+    </a>
+</div>
+
 <div class="gif-detail">
     {% if gif.mp4 or gif.webp %}
     <video loop autoplay muted>
