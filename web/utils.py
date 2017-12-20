@@ -22,6 +22,7 @@ def load_data(slug):
 
     gif_file = join(current_app.config['GIFS_PATH'], '{}.gif'.format(slug))
     mp4_file = join(current_app.config['GIFS_PATH'], '{}.mp4'.format(slug))
+    webp_file = join(current_app.config['GIFS_PATH'], '{}.webp'.format(slug))
 
     # If gif doesn't exist rasie a error.
     if not exists(gif_file):
@@ -31,6 +32,11 @@ def load_data(slug):
         data['mp4'] = True
         data['mp4_url'] = tpl_url.format(url_for('views.gif_image_mp4',
                                                  slug=slug))
+
+    if exists(webp_file):
+        data['webp'] = True
+        data['webp_url'] = tpl_url.format(url_for('views.gif_image_webp',
+                                                  slug=slug))
 
     image = Image.open(gif_file)
     data['width'], data['height'] = image.size

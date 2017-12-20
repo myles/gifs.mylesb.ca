@@ -25,10 +25,10 @@ body {
     .gif-list__link:hover {
       background-color: #a78fb7;
       color: #322b37; }
-  .gif-list__image {
+  .gif-list__image, .gif-list__video {
     display: block;
-    max-width: 100%;
-    max-height: 100%; }
+    max-height: 100%;
+    max-width: 100%; }
 
 .gif-detail {
   display: flex;

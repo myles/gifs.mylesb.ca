@@ -2,6 +2,8 @@ gifs/*.gif
 gifs/**/*.gif
 gifs/*.mp4
 gifs/**/*.mp4
+gifs/*.webp
+gifs/**/*.webp
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -156,3 +158,6 @@ typings/
 
 # dotenv environment variables file
 .env
+
+# macOS stuff
+.DS_Store

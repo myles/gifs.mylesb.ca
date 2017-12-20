@@ -18,7 +18,19 @@
 
     {% for gif in page.object_list %}
     <a class="gif-list__link" href="{{ url_for('views.gif_detail', slug=gif.slug) }}" {% if gif.caption %}title="{{ gif.caption }}"{% endif %}>
-        <img src="{{ url_for('views.gif_image', slug=gif.slug) }}" class="gif-list__image" />
+        {% if gif.mp4 or gif.webp %}
+        <video loop autoplay muted width="{{ gif.width }}" height="{{ gif.height }}" class="gif-list__video">
+            {% if gif.mp4 %}
+            <source src="{{ url_for('views.gif_image_mp4', slug=gif.slug) }}" type="video/mp4" class="gif-list__image">
+            {% endif %}
+            {% if gif.webp %}
+            <source src="{{ url_for('views.gif_image_webp', slug=gif.slug) }}" type="video/webp" class="gif-list__image">
+            {% endif %}
+            <img src="{{ url_for('views.gif_image', slug=gif.slug) }}" class="gif-list__image"{% if gif.caption %} alt="{{ gif.caption }}"{% endif %}>
+        </video>
+        {% else %}
+        <img src="{{ url_for('views.gif_image', slug=gif.slug) }}" class="gif-list__image" {% if gif.caption %}alt="{{ gif.caption }}"{% endif %} />
+        {% endif %}
     </a>
     {%- endfor %}
 

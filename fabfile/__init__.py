@@ -2,7 +2,7 @@
 """Fabfile."""
 from fabric.api import task
 
-from . import config, flaskcli, restore, rsync  # noqa: F401
+from . import config, flaskcli, giphy, restore, rsync  # noqa: F401
 
 
 @task

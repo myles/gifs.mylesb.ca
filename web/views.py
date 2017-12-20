@@ -55,6 +55,13 @@ def gif_image_mp4(slug):
                                '{}.mp4'.format(slug))
 
 
+@blueprint.route('/<path:slug>/image.webp')
+def gif_image_webp(slug):
+    """Get the WebP."""
+    return send_from_directory(current_app.config['GIFS_PATH'],
+                               '{}.webp'.format(slug))
+
+
 @blueprint.route('/<path:slug>/api.json')
 def gif_detail_json(slug):
     """Get detail of Gif in JSON."""
