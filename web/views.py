@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 """Views."""
-from flask import (Blueprint, abort, current_app, jsonify, render_template,
-                   send_from_directory, url_for)
+from feedgen.feed import FeedGenerator
+from flask import (Blueprint, abort, current_app, jsonify, make_response,
+                   render_template, send_from_directory, url_for)
 
 from .pagination import Paginator
 from .utils import all_gifs, load_data
@@ -28,6 +29,31 @@ def gif_list_json():
     gifs = all_gifs()
 
     return jsonify(gifs)
+
+
+@blueprint.route('/atom.xml')
+def git_list_atom():
+    """Generate an ATOM Feed."""
+    gifs = all_gifs()[:10]
+
+    feed_gen = FeedGenerator()
+    feed_gen.id('https://gifs.mylesb.ca/')
+    feed_gen.title("Myles' GIFs")
+    feed_gen.link(href='https://gifs.mylesb.ca/atom.xml', rel='self')
+
+    for gif in gifs:
+        feed_entry = feed_gen.add_entry()
+        feed_entry.id(gif['html_url'])
+        feed_entry.title(gif.get('caption', 'GIF'))
+        feed_entry.description(('<a href="{html_url}">'
+                                '<img src="{image_url}"></a>').format(**gif))
+        feed_entry.author({'name': 'Myles', 'email': 'me@mylesb.ca'})
+        feed_entry.enclosure(gif['image_url'])
+
+    response = make_response(feed_gen.atom_str(pretty=True))
+    response.headers['Content-Type'] = 'application/xml'
+
+    return response
 
 
 @blueprint.route('/<path:slug>/')
@@ -80,7 +106,7 @@ def gif_oembed_json(slug):
         'version': '1.0',
         'type': 'photo',
         'url': tpl_url.format(url_for('views.gif_image', slug=slug)),
-        'provider_name': "Myles' Gifs",
+        'provider_name': "Myles' GIFs",
         'provider_url': 'https://gifs.mylesb.ca/',
     }
 

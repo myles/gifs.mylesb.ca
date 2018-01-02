@@ -4,11 +4,14 @@
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-        <title>{% block title %}Myles' Gifs{%- endblock %}</title>
-        <meta name="description" content="{% block description %}{%- endblock %}">
+        <title>{% block title %}Myles' GIFs{%- endblock %}</title>
+        <meta name="description" content="{% block description %}GIF is pronounced with a soft 'G'.{%- endblock %}">
 
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+        <link rel="alternate" type="application/rss+xml" href="{{ url_for('views.git_list_atom') }}">
+
         {% block extra_head %}{%- endblock %}
 
         <script type="text/javascript">
@@ -41,5 +44,7 @@
         <![endif]-->
 
         {% block body %}{%- endblock %}
+
+        <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
     </body>
 </html>

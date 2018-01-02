@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """The app module."""
 from flask import Flask
+
 from web import commands
 from web.views import blueprint
 

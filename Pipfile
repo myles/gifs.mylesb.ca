@@ -1,12 +1,17 @@
 [[source]]
+
 url = "https://pypi.python.org/simple"
 verify_ssl = true
 
+
 [packages]
-Flask = "*"
-PyYAML = "*"
-Frozen-Flask = "*"
+
+flask = "*"
+pyyaml = "*"
+frozen-flask = "*"
 click = "*"
-Flask-paginate = "*"
-PyPages = "*"
-Pillow = "*"
+flask-paginate = "*"
+pypages = "*"
+pillow = "*"
+flask-sitemap = "*"
+feedgen = "*"

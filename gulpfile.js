@@ -4,17 +4,36 @@ var gulp = require('gulp'),
     sass = require('gulp-sass'),
     runSequence = require('run-sequence'),
     browserSync = require('browser-sync'),
+    rename = require("gulp-rename"),
+    babel = require('gulp-babel'),
+    sourcemaps = require('gulp-sourcemaps'),
     exec = require('child_process').exec,
     reload = browserSync.reload;
 
 gulp.task('styles', function() {
-  gulp.src('web/assets/style.scss')
+  gulp.src('web/assets/styles/index.scss')
+      .pipe(sourcemaps.init())
       .pipe(sass().on('error', sass.logError))
+      .pipe(sourcemaps.write())
+      .pipe(rename('style.css'))
       .pipe(gulp.dest('web/static/'))
       .pipe(reload({ stream: true }));
 });
 
-gulp.task('build', ['styles']);
+gulp.task('scripts', function() {
+  gulp.src('web/assets/scripts/index.js')
+      .pipe(sourcemaps.init())
+      .pipe(babel({
+        presets: ['env'],
+        plugins: ['add-module-exports']
+      }))
+      .pipe(sourcemaps.write())
+      .pipe(rename('script.js'))
+      .pipe(gulp.dest('web/static/'))
+      .pipe(reload({ stream: true }));
+});
+
+gulp.task('build', ['styles', 'scripts']);
 
 gulp.task('runServer', function() {
   exec('fab develop', function(err, stdout, stderr) {
@@ -33,7 +52,8 @@ gulp.task('browserSync', ['build'], function() {
 });
 
 gulp.task('watch', function() {
-  gulp.watch('web/**/*.scss', ['styles']).on('change', reload);
+  gulp.watch('web/assets/styles/*.scss', ['styles']).on('change', reload);
+  gulp.watch('web/assets/scripts/*.js', ['scripts']).on('change', reload);
   gulp.watch('web/**/*.html').on('change', reload);
 });
 

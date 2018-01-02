@@ -1,3 +1,3 @@
 # -*- coding: utf-8 -*-
-"""Myles' Gifs."""
+"""Myles' GIFs."""
 __version__ = '1.0.0'

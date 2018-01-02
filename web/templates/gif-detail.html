@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}{% if gif.caption %}{{ gif.caption }}{% elif gif.title %}{{ gif.title }}{% else %}Myles' Gifs{% endif %}{%- endblock %}
+{% block title %}{% if gif.caption %}{{ gif.caption }}{% elif gif.title %}{{ gif.title }}{% else %}Myles' GIFs{% endif %}{%- endblock %}
 
 {% block extra_head %}
 <link rel="alternate" type="text/javascript" href="{{ url_for('views.gif_detail_json', slug=gif.slug) }}">
@@ -8,14 +8,14 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@MylesGifs">
 <meta name="twitter:creator" content="@MylesB">
-<meta name="twitter:title" content="{% if gif.caption %}{{ gif.caption }}{% elif gif.title %}{{ gif.title }}{% else %}Myles' Gifs{% endif %}">
-<meta name="twitter:description" content="Myles' Gifs">
+<meta name="twitter:title" content="{% if gif.caption %}{{ gif.caption }}{% elif gif.title %}{{ gif.title }}{% else %}Myles' GIFs{% endif %}">
+<meta name="twitter:description" content="Myles' GIFs">
 <meta name="twitter:image" content="https://gifs.mylesb.ca{{ url_for('views.gif_image', slug=gif.slug) }}">
 
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://gifs.mylesb.ca{{ url_for('views.gif_detail', slug=gif.slug) }}">
-<meta property="og:title" content="{% if gif.caption %}{{ gif.caption }}{% elif gif.title %}{{ gif.title }}{% else %}Myles' Gifs{% endif %}">
-<meta property="og:description" content="Myles' Gifs">
+<meta property="og:title" content="{% if gif.caption %}{{ gif.caption }}{% elif gif.title %}{{ gif.title }}{% else %}Myles' GIFs{% endif %}">
+<meta property="og:description" content="Myles' GIFs">
 <meta property="og:image" content="https://gifs.mylesb.ca{{ url_for('views.gif_image', slug=gif.slug) }}">
 {% if gif.width %}<meta property="og:image:width" content="{{ gif.width }}">{% endif %}
 {% if gif.height %}<meta property="og:image:height" content="{{ gif.height }}">{% endif %}
@@ -26,23 +26,28 @@
 {% block body %}
 <div class="brand">
     <a href="{{ url_for('views.gif_list') }}" class="brand__link">
-        Myles' Gifs
+        Myles' GIFs
     </a>
+    <span class="brand__slogan">GIF is pronounced with a <em>soft G</em>.</span>
 </div>
 
 <div class="gif-detail">
-    {% if gif.mp4 or gif.webp %}
-    <video loop autoplay muted>
-        {% if gif.mp4 %}
-        <source src="{{ url_for('views.gif_image_mp4', slug=gif.slug) }}" type="video/mp4" class="gif-detail__image">
-        {% endif %}
-        {% if gif.webp %}
-        <source src="{{ url_for('views.gif_image_webp', slug=gif.slug) }}" type="video/webp" class="gif-detail__image">
-        {% endif %}
-        <img src="{{ url_for('views.gif_image', slug=gif.slug) }}" class="gif-detail__image"{% if gif.caption %} alt="{{ gif.caption }}"{% endif %}>
-    </video>
-    {% else %}
-    <img src="{{ url_for('views.gif_image', slug=gif.slug) }}" class="gif-detail__image" {% if gif.caption %}alt="{{ gif.caption }}"{% endif %} />
-    {% endif %}
+    <div class="gif-detail__wrapper">
+        <div class="gif-detail__image-wrapper">
+            {% if gif.mp4 or gif.webp %}
+            <video loop autoplay muted>
+                {% if gif.mp4 %}
+                <source src="{{ url_for('views.gif_image_mp4', slug=gif.slug) }}" type="video/mp4" class="gif-detail__image">
+                {% endif %}
+                {% if gif.webp %}
+                <source src="{{ url_for('views.gif_image_webp', slug=gif.slug) }}" type="video/webp" class="gif-detail__image">
+                {% endif %}
+                <img src="{{ url_for('views.gif_image', slug=gif.slug) }}" class="gif-detail__image"{% if gif.caption %} alt="{{ gif.caption }}"{% endif %}>
+            </video>
+            {% else %}
+            <img src="{{ url_for('views.gif_image', slug=gif.slug) }}" class="gif-detail__image" {% if gif.caption %}alt="{{ gif.caption }}"{% endif %} />
+            {% endif %}
+        </div>
+    </div>
 </div>
 {%- endblock body %}
