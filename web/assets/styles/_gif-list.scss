@@ -6,22 +6,28 @@
   justify-content: flex-start;
 
   &__link {
-    align-items: center;
-    background-color: lighten($primary-colour, 5);
     color: set-text-colour(lighten($primary-colour, 5));
-    display: flex;
     font-size: 2rem;
-    height: 225px;
-    justify-content: center;
-    margin: 10px;
-    padding: 15px;
+    padding: 1vw;
     text-decoration: none;
-    width: 225px;
 
     &:hover {
-      background-color: lighten($primary-colour, 25);
       color: set-text-colour(lighten($primary-colour, 25));
+
+      .gif-list__link-wrapper {
+        background-color: lighten($primary-colour, 25);
+      }
     }
+  }
+
+  &__link-wrapper {
+    align-items: center;
+    background-color: lighten($primary-colour, 5);
+    display: flex;
+    height: 20vw;
+    justify-content: center;
+    padding: 1vw;
+    width: 20vw;
   }
 
   &__image,
