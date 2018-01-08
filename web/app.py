@@ -4,6 +4,8 @@ import datetime
 
 from flask import Flask
 
+from flask_sitemap import Sitemap
+
 from web import commands
 from web.views import blueprint
 
