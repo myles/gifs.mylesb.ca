@@ -21,7 +21,7 @@ def deploy():
 
 
 @task
-def develop():
+def runserver():
     """Run a test web server locally."""
     gulp.build()
     flaskcli.run()
