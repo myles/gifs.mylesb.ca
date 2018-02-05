@@ -10,7 +10,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v={{ now('%s') }}">
 
-        <link rel="alternate" type="application/rss+xml" href="{{ url_for('views.git_list_atom') }}">
+        <link rel="alternate" type="application/rss+xml" href="{{ url_for('views.gif_list_atom') }}">
+        <link rel="alternate" type="application/json" href="{{ url_for('views.gif_list_jsonfeed') }}" />
 
         {% block extra_head %}{%- endblock %}
 

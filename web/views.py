@@ -31,15 +31,47 @@ def gif_list_json():
     return jsonify(gifs)
 
 
+@blueprint.route('/feed.json')
+def gif_list_jsonfeed():
+    """Generate an ATOM Feed."""
+    gifs = all_gifs()[:10]
+
+    feed = {
+        'title': "Myles' GIFs",
+        'home_page_url': 'https://gifs.mylesb.ca/',
+        'feed_url': 'https://gifs.mylesb.ca{}'.format(
+            url_for('views.gif_list_jsonfeed')),
+        'items': []
+    }
+
+    for gif in gifs:
+        feed_entry = {}
+        feed_entry['id'] = gif['html_url']
+        feed_entry['url'] = gif['html_url']
+        feed_entry['title'] = gif.get('caption', 'GIF')
+        feed_entry['content_html'] = (
+            '<a href="{html_url}"><img src="{image_url}"></a>').format(**gif)
+        feed_entry['author'] = {'name': 'Myles', 'url': 'https://mylesb.ca'}
+        feed_entry['image'] = gif['image_url']
+        feed_entry['date_published'] = gif['date']
+
+        feed['items'] += [feed_entry]
+
+    return jsonify(feed)
+
+
 @blueprint.route('/atom.xml')
-def git_list_atom():
+def gif_list_atom():
     """Generate an ATOM Feed."""
     gifs = all_gifs()[:10]
 
     feed_gen = FeedGenerator()
     feed_gen.id('https://gifs.mylesb.ca/')
     feed_gen.title("Myles' GIFs")
-    feed_gen.link(href='https://gifs.mylesb.ca/atom.xml', rel='self')
+    feed_gen.link(
+        href='https://gifs.mylesb.ca/{}'.format(
+            url_for('views.gif_list_atom')),
+        rel='self')
 
     for gif in gifs:
         feed_entry = feed_gen.add_entry()
