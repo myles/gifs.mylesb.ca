@@ -32,9 +32,14 @@ def gif_list_json():
 
 
 @blueprint.route('/feed.json')
-def gif_list_jsonfeed():
+@blueprint.route('/feed-<int:page>.json')
+def gif_list_jsonfeed(page=1):
     """Generate an ATOM Feed."""
-    gifs = all_gifs()[:10]
+    gifs = all_gifs()
+
+    paginator = Paginator(gifs, 25)
+
+    page = paginator.get_page(page)
 
     feed = {
         'title': "Myles' GIFs",
@@ -44,7 +49,11 @@ def gif_list_jsonfeed():
         'items': []
     }
 
-    for gif in gifs:
+    if page.has_next:
+        feed['next_url'] = 'https://gifs.mylesb.ca{}'.format(
+            url_for('views.gif_list_jsonfeed', page=page.next_page_number))
+
+    for gif in page.object_list:
         feed_entry = {}
         feed_entry['id'] = gif['html_url']
         feed_entry['url'] = gif['html_url']

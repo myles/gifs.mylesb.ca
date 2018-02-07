@@ -48,6 +48,13 @@
             <img src="{{ url_for('views.gif_image', slug=gif.slug) }}" class="gif-detail__image" {% if gif.caption %}alt="{{ gif.caption }}"{% endif %} />
             {% endif %}
         </div>
+
+        <div class="gif-detail__meta" style="display:none">
+            <a class="p-name u-url" href="https://gifs.mylesb.ca{{ url_for('views.gif_detail', slug=gif.slug) }}">{% if gif.caption %}{{ gif.caption }}{% elif gif.title %}{{ gif.title }}{% else %}Myles' GIFs{% endif %}</a>
+            <a rel="author" class="gif-detail__meta-author p-author h-card" href="https://mylesb.ca/">Myles Braithwaite</a>
+            <time class="dt-published gif-detail__meta-published" datetime="{{ gif.date }}">{{ gif.date }}</time>
+            <span class="gif-detail__meta-keywords">{% for keyword in gif.keywords %}<span class="p-category">{{ keyword }}</span>{% endfor %}</span>
+        </div>
     </div>
 </div>
 {%- endblock body %}
