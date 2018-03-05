@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 """Views."""
-from feedgen.feed import FeedGenerator
-from flask import (Blueprint, abort, current_app, jsonify, make_response,
-                   render_template, send_from_directory, url_for)
+from flask import (Blueprint, abort, current_app, jsonify, render_template,
+                   send_from_directory, url_for, Response)
+
+from feedgenerator import Atom1Feed
+from jsonfeed import JSONFeed
 
 from .pagination import Paginator
 from .utils import all_gifs, load_data
@@ -31,70 +33,56 @@ def gif_list_json():
     return jsonify(gifs)
 
 
-@blueprint.route('/feed.json')
-@blueprint.route('/feed-<int:page>.json')
-def gif_list_jsonfeed(page=1):
-    """Generate an ATOM Feed."""
+@blueprint.route('/feed.<string:feed_type>')
+@blueprint.route('/feed-<int:page>.<string:feed_type>')
+def feed(feed_type, page=1):
+    if feed_type not in ['json', 'xml']:
+        abort(404)
+
+    author_info = {
+        'author_name': 'Myles Braithwaite',
+        'author_link': 'https://mylesb.ca/',
+        'author_email': 'me@mylesb.ca'
+    }
+
+    meta_info = {
+        'title': "Myles' GIFs",
+        'description': 'GIF is pronounced with a soft G.',
+        'link': 'https://gifs.mylesb.ca/',
+        'feed_guid': 'https://gifs.mylesb.ca/',
+        'language': 'en'
+    }
+
+    if feed_type == 'json':
+        feed = JSONFeed(**{**meta_info, **author_info})
+        mimetype = feed.content_type
+    else:
+        feed = Atom1Feed(**{**meta_info, **author_info})
+        mimetype = 'application/atom+xml'
+
     gifs = all_gifs()
 
     paginator = Paginator(gifs, 25)
 
     page = paginator.get_page(page)
 
-    feed = {
-        'title': "Myles' GIFs",
-        'home_page_url': 'https://gifs.mylesb.ca/',
-        'feed_url': 'https://gifs.mylesb.ca{}'.format(
-            url_for('views.gif_list_jsonfeed')),
-        'items': []
-    }
-
-    if page.has_next:
-        feed['next_url'] = 'https://gifs.mylesb.ca{}'.format(
-            url_for('views.gif_list_jsonfeed', page=page.next_page_number))
+    if page.has_next and feed_type == 'json':
+        feed.next_url = 'https://gifs.mylesb.ca{}'.format(url_for(
+            'views.feed', feed_type='json', page=page.next_page_number))
 
     for gif in page.object_list:
-        feed_entry = {}
-        feed_entry['id'] = gif['html_url']
-        feed_entry['url'] = gif['html_url']
-        feed_entry['title'] = gif.get('caption', 'GIF')
-        feed_entry['content_html'] = (
-            '<a href="{html_url}"><img src="{image_url}"></a>').format(**gif)
-        feed_entry['author'] = {'name': 'Myles', 'url': 'https://mylesb.ca'}
-        feed_entry['image'] = gif['image_url']
-        feed_entry['date_published'] = gif['date']
+        feed.add_item(
+            guid=gif['html_url'],
+            title=gif.get('caption', 'GIF'),
+            link=gif['html_url'],
+            description=('<a href="{html_url}">'
+                         '<img src="{image_url}"></a>').format(**gif),
+            pubdate=gif['date'],
+            categories=gif.get('keywords'),
+            **author_info
+        )
 
-        feed['items'] += [feed_entry]
-
-    return jsonify(feed)
-
-
-@blueprint.route('/atom.xml')
-def gif_list_atom():
-    """Generate an ATOM Feed."""
-    gifs = all_gifs()[:10]
-
-    feed_gen = FeedGenerator()
-    feed_gen.id('https://gifs.mylesb.ca/')
-    feed_gen.title("Myles' GIFs")
-    feed_gen.link(
-        href='https://gifs.mylesb.ca/{}'.format(
-            url_for('views.gif_list_atom')),
-        rel='self')
-
-    for gif in gifs:
-        feed_entry = feed_gen.add_entry()
-        feed_entry.id(gif['html_url'])
-        feed_entry.title(gif.get('caption', 'GIF'))
-        feed_entry.description(('<a href="{html_url}">'
-                                '<img src="{image_url}"></a>').format(**gif))
-        feed_entry.author({'name': 'Myles', 'email': 'me@mylesb.ca'})
-        feed_entry.enclosure(gif['image_url'])
-
-    response = make_response(feed_gen.atom_str(pretty=True))
-    response.headers['Content-Type'] = 'application/xml'
-
-    return response
+    return Response(feed.writeString('utf-8'), mimetype=mimetype)
 
 
 @blueprint.route('/<path:slug>/')

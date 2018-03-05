@@ -4,6 +4,7 @@ from glob import glob
 from os.path import exists, getmtime, join
 
 import yaml
+from dateutil.parser import parse as du_parse
 from flask import current_app, url_for
 from PIL import Image
 
@@ -50,7 +51,12 @@ def load_data(slug):
         meta = {}
 
     if not meta.get('date'):
-        meta['date'] = datetime.fromtimestamp(getmtime(gif_file)).isoformat()
+        meta['date'] = datetime.fromtimestamp(getmtime(gif_file))
+
+    if type(meta.get('date')) != datetime:
+        meta['date'] = du_parse(meta['date'])
+
+    meta['sort'] = meta['date'].isoformat()
 
     data.update(meta)
 
@@ -71,6 +77,6 @@ def all_gifs():
 
         gifs.append(gif)
 
-    gifs = sorted(gifs, key=lambda x: x['date'], reverse=True)
+    gifs = sorted(gifs, key=lambda x: x['sort'], reverse=True)
 
     return gifs

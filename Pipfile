@@ -6,12 +6,14 @@ verify_ssl = true
 
 [packages]
 
-flask = "*"
-pyyaml = "*"
-frozen-flask = "*"
+Flask = "*"
+PyYAML = "*"
+Frozen-Flask = "*"
 click = "*"
-flask-paginate = "*"
-pypages = "*"
-pillow = "*"
-flask-sitemap = "*"
-feedgen = "*"
+Flask-paginate = "*"
+PyPages = "*"
+Pillow = "*"
+Flask-Sitemap = "*"
+feedgenerator = "*"
+django-jsonfeed = "*"
+dateutils = "*"
