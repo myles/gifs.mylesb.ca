@@ -13,6 +13,11 @@
         <link rel="alternate" type="application/rss+xml" href="{{ url_for('views.feed', feed_type='xml') }}">
         <link rel="alternate" type="application/json" href="{{ url_for('views.feed', feed_type='json') }}" />
 
+        <link href="mailto:me@mylesb.ca" rel="me">
+
+        <link rel="pingback" href="https://webmention.io/gifs.mylesb.ca/xmlrpc">
+        <link rel="webmention" href="https://webmention.io/gifs.mylesb.ca/webmention">
+
         {% block extra_head %}{%- endblock %}
 
         <script type="text/javascript">
