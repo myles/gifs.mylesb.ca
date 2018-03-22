@@ -42,7 +42,7 @@
                 {% if gif.webp %}
                 <source src="{{ url_for('views.gif_image_webp', slug=gif.slug) }}" type="video/webp" class="gif-detail__image">
                 {% endif %}
-                <img src="{{ url_for('views.gif_image', slug=gif.slug) }}" class="gif-detail__image"{% if gif.caption %} alt="{{ gif.caption }}"{% endif %}>
+                <img src="{{ url_for('views.gif_image', slug=gif.slug) }}" class="gif-detail__image u-photo"{% if gif.caption %} alt="{{ gif.caption }}"{% endif %}>
             </video>
             {% else %}
             <img src="{{ url_for('views.gif_image', slug=gif.slug) }}" class="gif-detail__image" {% if gif.caption %}alt="{{ gif.caption }}"{% endif %} />
