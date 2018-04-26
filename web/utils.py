@@ -46,7 +46,7 @@ def load_data(slug):
 
     if exists(yaml_file):
         with open(yaml_file) as fobj:
-            meta = yaml.load(fobj.read())
+            meta = yaml.safe_load(fobj.read())
     else:
         meta = {}
 
