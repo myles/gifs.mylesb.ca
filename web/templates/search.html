@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3/dist/instantsearch.min.css">
+{%- endblock %}
+
+{% block extra_body %}
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3/dist/instantsearch.min.js"></script>
+{%- endblock %}
+
+{% block body %}
+<input id="search-input" placeholder="Search for gifs">
+
+<script type="text/html" id="hit-template">
+    <img src="{{{_highlightResult.gif_url.value}}}"/>
+</script>
+{%- endblock %}

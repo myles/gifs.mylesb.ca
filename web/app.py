@@ -14,6 +14,7 @@ def create_app(config='web.config.Config'):
     app.config.from_object(config)
 
     app.cli.add_command(commands.freeze)
+    app.cli.add_command(commands.update_index)
 
     app.register_blueprint(blueprint)
 
