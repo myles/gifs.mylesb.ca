@@ -2,7 +2,7 @@
 """Fabfile."""
 from fabric.api import task
 
-from . import config, flaskcli, gulp, giphy, restore, rsync  # noqa: F401
+from . import config, flaskcli, gulp, giphy, netlify, restore, rsync
 
 
 @task
@@ -17,7 +17,8 @@ def deploy():
     """Deploy the website."""
     gulp.build()
     flaskcli.freeze()
-    rsync.push()
+    # rsync.push()
+    netlify.push()
 
 
 @task

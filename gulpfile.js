@@ -1,10 +1,8 @@
-'use strict';
-
 var gulp = require('gulp'),
     sass = require('gulp-sass'),
     runSequence = require('run-sequence'),
     browserSync = require('browser-sync'),
-    rename = require("gulp-rename"),
+    rename = require('gulp-rename'),
     babel = require('gulp-babel'),
     sourcemaps = require('gulp-sourcemaps'),
     exec = require('child_process').exec,
@@ -57,7 +55,7 @@ gulp.task('watch', function() {
   gulp.watch('web/**/*.html').on('change', reload);
 });
 
-gulp.task('develop', function() {
+gulp.task('run', function() {
   runSequence('build', 'runServer', 'browserSync', 'watch')
 });
 

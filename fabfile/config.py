@@ -13,7 +13,8 @@ env.flask_app = join(env.root_dir, 'autoapp.py')
 env.build_dir = join(env.root_dir, 'build')
 env.gif_dir = join(env.root_dir, 'gifs')
 
-env.remote = ('myles@bear.mylesbraithwaite.com:'
-              '/srv/www/mylesb.ca/gifs/html/')
+env.remote = (
+    'myles@bear.mylesbraithwaite.com:/srv/www/mylesb.ca/gifs/html/'
+)
 
 env.giphy_api_key = environ.get('GIPHY_API_KEY', None)
