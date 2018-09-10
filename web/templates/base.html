@@ -8,7 +8,7 @@
         <meta name="description" content="{% block description %}GIF is pronounced with a soft 'G'.{%- endblock %}">
 
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v={{ now('%s') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
         <link rel="alternate" type="application/rss+xml" href="{{ url_for('views.feed', feed_type='xml') }}">
         <link rel="alternate" type="application/json" href="{{ url_for('views.feed', feed_type='json') }}" />
@@ -53,6 +53,6 @@
         {% block body %}{%- endblock %}
 
         {% block extra_body %}{%- endblock %}
-        <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}?v={{ now('%s') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
     </body>
 </html>
